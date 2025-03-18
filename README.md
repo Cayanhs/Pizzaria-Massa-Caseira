@@ -1,6 +1,8 @@
 ﻿# 🍕 Pizzaria Massa Caseira
 Este é um site desenvolvido para a Pizzaria Massa Caseira, proporcionando uma experiência digital moderna e intuitiva para os clientes explorarem o cardápio e realizarem pedidos online.
 
+https://pizzaria-massa-caseira.vercel.app/
+
 🚀 Tecnologias Utilizadas<br>
 HTML, CSS & Bootstrap para o design responsivo<br>
 JavaScript para interatividade<br>
