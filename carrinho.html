@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carrinho - Pizzaria Massa Caseira</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="shortcut icon" href="logo.png" type="image/x-icon" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="logo">
+          <img src="logo.png" alt="Pizzaria Massa Caseira" />
+          <span>Pizzaria Massa Caseira</span>
+        </div>
+        <button class="menu-toggle">
+          <i class="bi bi-justify"></i>
+        </button>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="cardapio.html">Cardápio</a></li>
+          <li><a href="index.html#contato">Contato</a></li>
+          <li><a href="index.html#mapa">Localização</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Adicione este botão logo após o header -->
+    <div class="voltar-cardapio">
+      <a href="cardapio.html" class="btn-voltar">
+        <i class="bi bi-arrow-left-circle"></i>
+        Voltar ao Cardápio
+      </a>
+    </div>
+
+    <main class="carrinho-page">
+      <h1 class="carrinho-titulo">
+        <i class="bi bi-cart3"></i>
+        Seu Carrinho
+      </h1>
+
+      <!-- Botão voltar -->
+      <div class="voltar-cardapio">
+        <a href="cardapio.html" class="btn-voltar">
+          <i class="bi bi-arrow-left-circle"></i>
+          Voltar ao Cardápio
+        </a>
+      </div>
+
+      <!-- Container principal -->
+      <div class="carrinho-wrapper">
+        <!-- Itens do carrinho -->
+        <div class="carrinho-itens">
+          <!-- Itens serão inseridos aqui via JavaScript -->
+        </div>
+
+        <!-- Resumo do pedido -->
+        <div class="carrinho-resumo">
+          <h2><i class="bi bi-receipt"></i> Resumo do Pedido</h2>
+          <div class="resumo-detalhes">
+            <div class="subtotal">
+              <span>Subtotal:</span>
+              <span>R$ 0,00</span>
+            </div>
+            <div class="taxa-entrega">
+              <span>Taxa de Entrega:</span>
+              <span>R$ 2,00</span>
+            </div>
+            <div class="total">
+              <span>Total:</span>
+              <span>R$ 0,00</span>
+            </div>
+          </div>
+          <button class="btn-finalizar" onclick="finalizarPedido()">
+            <i class="bi bi-check-circle"></i> Finalizar Pedido
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Modal de Finalização -->
+    <div class="modal" id="modalFinalizar">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2><i class="bi bi-person-circle"></i> Dados do Pedido</h2>
+          <button class="btn-fechar" onclick="fecharModalFinalizar()">
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="formPedido" onsubmit="enviarPedido(event)">
+            <div class="form-group">
+              <label for="nome">Nome Completo</label>
+              <input type="text" id="nome" required />
+            </div>
+            <div class="form-group">
+              <label for="telefone">Telefone</label>
+              <input type="tel" id="telefone" required />
+            </div>
+            <div class="form-group">
+              <label for="endereco">Endereço de Entrega</label>
+              <input type="text" id="endereco" required />
+            </div>
+            <div class="form-group">
+              <label for="observacoes">Observações</label>
+              <textarea id="observacoes"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="formaPagamento">Forma de Pagamento</label>
+              <select id="formaPagamento" required>
+                <option value="">Selecione...</option>
+                <option value="dinheiro">Dinheiro</option>
+                <option value="cartao">Cartão de Crédito/Débito</option>
+                <option value="pix">PIX</option>
+              </select>
+            </div>
+            <button type="submit" class="btn-confirmar">
+              <i class="bi bi-check-circle"></i> Confirmar Pedido
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3><i class="bi bi-clock"></i> Horário de Funcionamento</h3>
+          <p>
+            <i class="bi bi-calendar-check"></i> Segunda a Domingo: 18h às 23h
+          </p>
+        </div>
+
+        <div class="footer-section">
+          <h3><i class="bi bi-person-lines-fill"></i> Contato</h3>
+          <p><i class="bi bi-telephone-fill"></i> (85) 98790-8653</p>
+          <p>
+            <i class="bi bi-geo-alt-fill"></i> R. Almírante Rufino, 470 - Vila
+            União
+          </p>
+        </div>
+
+        <div class="footer-section">
+          <h3><i class="bi bi-share"></i> Redes Sociais</h3>
+          <div class="social-links">
+            <a href="#" target="_blank"
+              ><i class="bi bi-instagram"></i> Instagram</a
+            >
+            <a href="#" target="_blank"
+              ><i class="bi bi-facebook"></i> Facebook</a
+            >
+            <a href="#" target="_blank"
+              ><i class="bi bi-whatsapp"></i> WhatsApp</a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Pizzaria Massa Caseira. Todos os direitos reservados.</p>
+      </div>
+    </footer>
+
+    <script src="database.js"></script>
+    <script src="script_carrinho.js"></script>
+
+    <!-- Adicione estes estilos -->
+    <style>
+      /* Estilos corrigidos */
+      .carrinho-page {
+        padding: 80px 20px 20px 20px; /* Aumentado padding-top para não ficar atrás do header */
+      }
+
+      .voltar-cardapio {
+        margin-bottom: 20px;
+      }
+
+      .carrinho-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .carrinho-itens {
+        width: 100%;
+      }
+
+      .carrinho-resumo {
+        width: 100%;
+        background: #1a1a1a;
+        border-radius: 8px;
+        padding: 20px;
+        margin-top: 20px;
+        border: 1px solid #333;
+      }
+
+      .resumo-detalhes {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin: 15px 0;
+      }
+
+      .subtotal,
+      .taxa-entrega,
+      .total {
+        display: flex;
+        justify-content: space-between;
+        color: #fff;
+      }
+
+      .total {
+        border-top: 1px solid #333;
+        padding-top: 10px;
+        margin-top: 10px;
+        font-weight: bold;
+        color: #ffc107;
+      }
+
+      .btn-finalizar {
+        width: 100%;
+        padding: 12px;
+        background: #ffc107;
+        color: #000;
+        border: none;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-top: 15px;
+        cursor: pointer;
+      }
+
+      /* Ajustes para Mobile */
+      @media (max-width: 768px) {
+        .carrinho-page {
+          padding: 70px 10px 20px 10px;
+        }
+
+        .carrinho-wrapper {
+          gap: 15px;
+        }
+
+        .carrinho-resumo {
+          position: relative; /* Garante que não fique fixo */
+          bottom: auto;
+          left: auto;
+          right: auto;
+        }
+      }
+
+      /* Ajustes no tamanho dos itens do pedido */
+      .item-carrinho {
+        background: #222;
+        border-radius: 8px;
+        padding: 12px; /* Reduzido de 15px */
+        display: flex;
+        flex-direction: column;
+        gap: 8px; /* Reduzido de 10px */
+      }
+
+      .item-carrinho img {
+        width: 120px; /* Reduzido de 150px */
+        height: 120px; /* Reduzido de 150px */
+        object-fit: contain;
+        margin: 0 auto;
+      }
+
+      .item-info h3 {
+        font-size: 1.1rem; /* Reduzido de 1.2rem */
+        margin-bottom: 4px;
+        color: #ffc107;
+      }
+
+      .item-preco {
+        font-size: 1rem; /* Reduzido de 1.1rem */
+        color: #fff;
+        margin: 4px 0;
+      }
+
+      .controles-quantidade {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 12px; /* Reduzido de 15px */
+        margin: 8px 0;
+      }
+
+      .btn-quantidade {
+        width: 30px; /* Reduzido de 35px */
+        height: 30px; /* Reduzido de 35px */
+        font-size: 1rem;
+      }
+
+      .quantidade {
+        font-size: 1.1rem; /* Reduzido de 1.2rem */
+      }
+
+      .btn-remover {
+        padding: 6px 12px; /* Reduzido de 8px 15px */
+        font-size: 0.9rem;
+        margin-top: 8px;
+      }
+
+      /* Ajuste no espaçamento entre itens */
+      .carrinho-itens {
+        gap: 12px; /* Reduzido de 15px */
+      }
+
+      /* Adicione estes estilos para o select de forma de pagamento */
+      #formaPagamento {
+        background-color: #222;
+        color: #fff;
+        border: 1px solid #333;
+        padding: 8px;
+        border-radius: 4px;
+        width: 100%;
+        font-size: 1rem;
+      }
+
+      #formaPagamento option {
+        background-color: #222;
+        color: #fff;
+      }
+
+      #formaPagamento:focus {
+        outline: none;
+        border-color: #ffc107;
+        box-shadow: 0 0 0 2px rgba(255, 193, 7, 0.2);
+      }
+    </style>
+  </body>
+</html>

@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cardápio - Pizzaria Massa Caseira</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="shortcut icon" href="logo.png" type="image/x-icon" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <style>
+      .produtos {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+        padding: 20px;
+      }
+
+      .produto {
+        background: white;
+        border: 1px solid #e0e0e0;
+        border-radius: 12px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      }
+
+      .produto:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        border-color: #ffc107;
+      }
+
+      .produto img {
+        width: 100%;
+        height: 200px;
+        object-fit: contain;
+        border-radius: 8px;
+        margin-bottom: 10px;
+      }
+
+      .produto h3 {
+        font-size: 1.4rem;
+        color: #333;
+        margin: 0;
+        padding-bottom: 8px;
+        border-bottom: 1px solid #eee;
+      }
+
+      .produto p {
+        color: #666;
+        font-size: 0.95rem;
+        line-height: 1.4;
+        margin: 0;
+        flex-grow: 1;
+      }
+
+      .produto .preco {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: #ffc107;
+        display: block;
+        margin: 10px 0;
+      }
+
+      .btn-pedir {
+        background: #ffc107;
+        color: #000;
+        border: none;
+        padding: 12px;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        transition: all 0.3s ease;
+      }
+
+      .btn-pedir:hover {
+        background: #ffb300;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(255, 193, 7, 0.2);
+      }
+
+      .btn-pedir i {
+        font-size: 1.1em;
+      }
+
+      .produto-info {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .produto-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 5px;
+      }
+
+      .produto-header h3 {
+        border: none;
+        padding: 0;
+      }
+
+      /* Responsividade do Cardápio */
+      @media (max-width: 1200px) {
+        .produtos {
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+      }
+
+      @media (max-width: 768px) {
+        .categorias {
+          flex-wrap: wrap;
+          gap: 10px;
+        }
+
+        .categoria-btn {
+          width: calc(33.33% - 10px);
+          padding: 10px;
+          font-size: 0.9rem;
+        }
+
+        .produto {
+          margin: 10px;
+        }
+
+        .produto img {
+          height: 180px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .cardapio-titulo {
+          font-size: 1.5rem;
+          padding: 15px;
+        }
+
+        .categorias {
+          padding: 10px;
+        }
+
+        .categoria-btn {
+          width: calc(50% - 5px);
+        }
+
+        .produtos {
+          grid-template-columns: 1fr;
+          gap: 15px;
+          padding: 10px;
+        }
+
+        .produto {
+          padding: 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="logo">
+          <img src="logo.png" alt="Pizzaria Massa Caseira" />
+          <span>Pizzaria Massa Caseira</span>
+        </div>
+        <button class="menu-toggle">
+          <i class="bi bi-justify"></i>
+        </button>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="cardapio.html">Cardápio</a></li>
+          <li><a href="index.html#contato">Contato</a></li>
+          <li><a href="index.html#mapa">Localização</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Carrinho Flutuante -->
+    <div class="carrinho-flutuante">
+      <a href="carrinho.html" class="btn-carrinho">
+        <i class="bi bi-cart3"></i>
+        <span class="contador-itens">0</span>
+      </a>
+    </div>
+
+    <main class="cardapio">
+      <h1 class="cardapio-titulo">
+        <i class="bi bi-menu-button-wide"></i>
+        Nosso Cardápio
+      </h1>
+
+      <!-- Categorias -->
+      <div class="categorias">
+        <button class="categoria-btn active" data-categoria="pizzas">
+          <i class="bi bi-pizza"></i>
+          Pizzas
+        </button>
+        <button class="categoria-btn" data-categoria="esfihas">Esfihas</button>
+        <button class="categoria-btn" data-categoria="pasteis">Pastéis</button>
+      </div>
+
+      <!-- Seção de Pizzas -->
+      <section class="categoria" id="pizzas">
+        <h2><i class="bi bi-pizza"></i> Pizzas</h2>
+        <div class="produtos">
+          <div class="produto" data-id="pizza1">
+            <img
+              src="https://www.pngmart.com/files/1/Pepperoni-Pizza-PNG-Transparent-Image.png"
+              alt="Pizza Pepperoni"
+            />
+            <div class="produto-info">
+              <div class="produto-header">
+                <h3>Pepperoni</h3>
+                <span class="preco">R$ 45,00</span>
+              </div>
+              <p>Molho de tomate, mussarela e pepperoni</p>
+              <button
+                class="btn-pedir"
+                onclick="pedirAgora(this.closest('.produto'))"
+              >
+                <i class="bi bi-cart-plus"></i> Pedir Agora
+              </button>
+            </div>
+          </div>
+          <div class="produto" data-id="pizza2">
+            <img
+              src="https://www.pngmart.com/files/1/Pepperoni-Pizza-PNG-Transparent-Image.png"
+              alt="Pizza Margherita"
+            />
+            <div class="produto-info">
+              <div class="produto-header">
+                <h3>Margherita</h3>
+                <span class="preco">R$ 40,00</span>
+              </div>
+              <p>Molho de tomate, mussarela, manjericão e tomate</p>
+              <button
+                class="btn-pedir"
+                onclick="pedirAgora(this.closest('.produto'))"
+              >
+                <i class="bi bi-cart-plus"></i> Pedir Agora
+              </button>
+            </div>
+          </div>
+          <div class="produto" data-id="pizza3">
+            <img
+              src="https://www.pngmart.com/files/1/Pepperoni-Pizza-PNG-Transparent-Image.png"
+              alt="Pizza Portuguesa"
+            />
+            <div class="produto-info">
+              <div class="produto-header">
+                <h3>Portuguesa</h3>
+                <span class="preco">R$ 42,00</span>
+              </div>
+              <p>
+                Molho de tomate, mussarela, presunto, cebola, tomate e azeitonas
+              </p>
+              <button
+                class="btn-pedir"
+                onclick="pedirAgora(this.closest('.produto'))"
+              >
+                <i class="bi bi-cart-plus"></i> Pedir Agora
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Seção de Esfihas -->
+      <section class="categoria" id="esfihas">
+        <h2>Esfihas</h2>
+        <div class="produtos">
+          <div class="produto" data-id="esfiha1">
+            <img
+              src="https://ranchopizzaria.com.br/delivery/wp-content/uploads/2022/08/esfirra-05.png"
+              alt="Esfiha de Carne"
+            />
+            <div class="produto-info">
+              <div class="produto-header">
+                <h3>Carne</h3>
+                <span class="preco">R$ 8,00</span>
+              </div>
+              <p>Carne moída temperada com cebola e temperos</p>
+              <button
+                class="btn-pedir"
+                onclick="pedirAgora(this.closest('.produto'))"
+              >
+                <i class="bi bi-cart-plus"></i> Pedir Agora
+              </button>
+            </div>
+          </div>
+          <div class="produto" data-id="esfiha2">
+            <img
+              src="https://ranchopizzaria.com.br/delivery/wp-content/uploads/2022/08/esfirra-05.png"
+              alt="Esfiha de Frango"
+            />
+            <div class="produto-info">
+              <div class="produto-header">
+                <h3>Frango</h3>
+                <span class="preco">R$ 8,00</span>
+              </div>
+              <p>Frango desfiado com catupiry e temperos especiais</p>
+              <button
+                class="btn-pedir"
+                onclick="pedirAgora(this.closest('.produto'))"
+              >
+                <i class="bi bi-cart-plus"></i> Pedir Agora
+              </button>
+            </div>
+          </div>
+          <div class="produto" data-id="esfiha3">
+            <img
+              src="https://ranchopizzaria.com.br/delivery/wp-content/uploads/2022/08/esfirra-05.png"
+              alt="Esfiha de Queijo"
+            />
+            <div class="produto-info">
+              <div class="produto-header">
+                <h3>Queijo</h3>
+                <span class="preco">R$ 7,00</span>
+              </div>
+              <p>Mussarela com catupiry e orégano</p>
+              <button
+                class="btn-pedir"
+                onclick="pedirAgora(this.closest('.produto'))"
+              >
+                <i class="bi bi-cart-plus"></i> Pedir Agora
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Seção de Pastéis -->
+      <section class="categoria" id="pasteis">
+        <h2>Pastéis</h2>
+        <div class="produtos">
+          <div class="produto" data-id="pastel1">
+            <img
+              src="https://www.bellavenezia.com.br/wp-content/uploads/2017/01/pasteis-do-Rio-1.png"
+              alt="Pastel de Queijo"
+            />
+            <div class="produto-info">
+              <div class="produto-header">
+                <h3>Queijo</h3>
+                <span class="preco">R$ 6,00</span>
+              </div>
+              <p>Mussarela com catupiry</p>
+              <button
+                class="btn-pedir"
+                onclick="pedirAgora(this.closest('.produto'))"
+              >
+                <i class="bi bi-cart-plus"></i> Pedir Agora
+              </button>
+            </div>
+          </div>
+          <div class="produto" data-id="pastel2">
+            <img
+              src="https://www.bellavenezia.com.br/wp-content/uploads/2017/01/pasteis-do-Rio-1.png"
+              alt="Pastel de Carne"
+            />
+            <div class="produto-info">
+              <div class="produto-header">
+                <h3>Carne</h3>
+                <span class="preco">R$ 6,00</span>
+              </div>
+              <p>Carne moída temperada com cebola e temperos</p>
+              <button
+                class="btn-pedir"
+                onclick="pedirAgora(this.closest('.produto'))"
+              >
+                <i class="bi bi-cart-plus"></i> Pedir Agora
+              </button>
+            </div>
+          </div>
+          <div class="produto" data-id="pastel3">
+            <img
+              src="https://www.bellavenezia.com.br/wp-content/uploads/2017/01/pasteis-do-Rio-1.png"
+              alt="Pastel de Frango"
+            />
+            <div class="produto-info">
+              <div class="produto-header">
+                <h3>Frango</h3>
+                <span class="preco">R$ 6,00</span>
+              </div>
+              <p>Frango desfiado com catupiry</p>
+              <button
+                class="btn-pedir"
+                onclick="pedirAgora(this.closest('.produto'))"
+              >
+                <i class="bi bi-cart-plus"></i> Pedir Agora
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3><i class="bi bi-clock"></i> Horário de Funcionamento</h3>
+          <p>
+            <i class="bi bi-calendar-check"></i> Segunda a Domingo: 18h às 23h
+          </p>
+        </div>
+
+        <div class="footer-section">
+          <h3><i class="bi bi-person-lines-fill"></i> Contato</h3>
+          <p><i class="bi bi-telephone-fill"></i> (85) 98790-8653</p>
+          <p>
+            <i class="bi bi-geo-alt-fill"></i> R. Almírante Rufino, 470 - Vila
+            União
+          </p>
+        </div>
+
+        <div class="footer-section">
+          <h3><i class="bi bi-share"></i> Redes Sociais</h3>
+          <div class="social-links">
+            <a href="#" target="_blank"
+              ><i class="bi bi-instagram"></i> Instagram</a
+            >
+            <a href="#" target="_blank"
+              ><i class="bi bi-facebook"></i> Facebook</a
+            >
+            <a href="#" target="_blank"
+              ><i class="bi bi-whatsapp"></i> WhatsApp</a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Pizzaria Massa Caseira. Todos os direitos reservados.</p>
+      </div>
+    </footer>
+
+    <script src="database.js"></script>
+    <script>
+      // Menu Mobile
+      const menuToggle = document.querySelector(".menu-toggle");
+      const navLinks = document.querySelector(".nav-links");
+      const links = document.querySelectorAll(".nav-links a");
+
+      menuToggle.addEventListener("click", () => {
+        menuToggle.classList.toggle("active");
+        navLinks.classList.toggle("active");
+      });
+
+      links.forEach((link) => {
+        link.addEventListener("click", () => {
+          menuToggle.classList.remove("active");
+          navLinks.classList.remove("active");
+        });
+      });
+
+      // Navegação entre categorias
+      const categoriaBtns = document.querySelectorAll(".categoria-btn");
+      const categorias = document.querySelectorAll(".categoria");
+
+      categoriaBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          categoriaBtns.forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+
+          const categoriaId = btn.getAttribute("data-categoria");
+
+          categorias.forEach((cat) => {
+            cat.style.display = "none";
+          });
+
+          document.getElementById(categoriaId).style.display = "block";
+        });
+      });
+
+      function pedirAgora(elemento) {
+        // Previne a propagação do clique
+        event.preventDefault();
+        event.stopPropagation();
+
+        // Coleta os dados do produto
+        const produto = {
+          id: elemento.dataset.id,
+          nome: elemento.querySelector("h3").textContent,
+          descricao: elemento.querySelector("p").textContent,
+          preco: parseFloat(
+            elemento.querySelector(".preco").textContent.replace("R$ ", "")
+          ),
+          imagem: elemento.querySelector("img").src,
+          quantidade: 1,
+        };
+
+        // Calcula o subtotal
+        produto.subtotal = produto.preco * produto.quantidade;
+
+        // Pega o carrinho atual ou cria um novo
+        let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+
+        // Verifica se o produto já existe no carrinho
+        const itemExistente = carrinho.find((item) => item.id === produto.id);
+        if (itemExistente) {
+          itemExistente.quantidade++;
+          itemExistente.subtotal =
+            itemExistente.quantidade * itemExistente.preco;
+        } else {
+          carrinho.push(produto);
+        }
+
+        // Salva no localStorage
+        localStorage.setItem("carrinho", JSON.stringify(carrinho));
+
+        // Redireciona para o carrinho
+        window.location.href = "carrinho.html";
+      }
+    </script>
+  </body>
+</html>

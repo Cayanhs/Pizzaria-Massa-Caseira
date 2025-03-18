@@ -1,0 +1,126 @@
+.detalhe-pedido {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.detalhe-header {
+  margin-bottom: 30px;
+}
+
+.btn-voltar {
+  background: none;
+  border: none;
+  color: #4169e1;
+  font-size: 1.1em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 0;
+}
+
+.detalhe-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+}
+
+.produto-imagem img {
+  width: 100%;
+  border-radius: 12px;
+}
+
+.produto-info h1 {
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.descricao {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.preco {
+  font-size: 2em;
+  color: #2ecc71;
+  margin-bottom: 30px;
+}
+
+.ingredientes {
+  margin-bottom: 30px;
+}
+
+.ingredientes h3 {
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.ingredientes ul {
+  list-style: none;
+  padding: 0;
+}
+
+.ingredientes li {
+  color: #666;
+  padding: 5px 0;
+}
+
+.ingredientes li:before {
+  content: "•";
+  color: #2ecc71;
+  margin-right: 10px;
+}
+
+.nutricional {
+  margin-bottom: 30px;
+}
+
+.nutricional h3 {
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.info-item {
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-adicionar-carrinho {
+  width: 100%;
+  padding: 15px;
+  background: #2ecc71;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: background 0.3s ease;
+}
+
+.btn-adicionar-carrinho:hover {
+  background: #27ae60;
+}
+
+@media (max-width: 768px) {
+  .detalhe-content {
+    grid-template-columns: 1fr;
+  }
+}

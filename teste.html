@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Teste Pizzaria</title>
+    <style>
+      .produto {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin: 10px;
+        display: inline-block;
+      }
+      .produto img {
+        max-width: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Produtos da Pizzaria</h1>
+    <div id="produtos"></div>
+
+    <script>
+      // Buscar produtos da API
+      fetch("http://localhost:3000/api/produtos")
+        .then((resposta) => resposta.json())
+        .then((produtos) => {
+          const div = document.getElementById("produtos");
+          produtos.forEach((produto) => {
+            div.innerHTML += `
+                        <div class="produto">
+                            <h2>${produto.nome}</h2>
+                            <img src="${produto.imagem}" alt="${produto.nome}">
+                            <p>${produto.descricao}</p>
+                            <p>Preço: R$ ${produto.preco}</p>
+                        </div>
+                    `;
+          });
+        })
+        .catch((erro) => {
+          console.error("Erro:", erro);
+          document.getElementById("produtos").innerHTML =
+            '<p style="color: red">Erro ao carregar produtos</p>';
+        });
+    </script>
+  </body>
+</html>

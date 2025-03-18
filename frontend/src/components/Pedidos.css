@@ -1,0 +1,31 @@
+.pedidos-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.filtros {
+  margin-bottom: 30px;
+}
+
+.filtros-status {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.filtro-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 20px;
+  background: #f0f0f0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filtro-btn:hover {
+  background: #e0e0e0;
+}
+
+.filtro-btn.active { 

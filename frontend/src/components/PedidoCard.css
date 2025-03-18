@@ -1,0 +1,117 @@
+.pedido-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin: 16px;
+  padding: 20px;
+  max-width: 600px;
+}
+
+.pedido-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.pedido-numero {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #333;
+}
+
+.pedido-status {
+  padding: 6px 12px;
+  border-radius: 20px;
+  color: white;
+  font-size: 0.9em;
+  font-weight: 500;
+}
+
+.pedido-cliente {
+  margin-bottom: 20px;
+}
+
+.pedido-cliente h3 {
+  color: #444;
+  margin-bottom: 10px;
+}
+
+.pedido-cliente p {
+  margin: 5px 0;
+  color: #666;
+}
+
+.pedido-cliente i {
+  margin-right: 8px;
+  color: #888;
+}
+
+.pedido-itens {
+  margin-bottom: 20px;
+}
+
+.pedido-itens h3 {
+  color: #444;
+  margin-bottom: 15px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.item img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 15px;
+}
+
+.item-info {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item-nome {
+  font-weight: 500;
+  color: #333;
+}
+
+.item-quantidade {
+  color: #666;
+  margin: 0 15px;
+}
+
+.item-preco {
+  font-weight: 500;
+  color: #2ecc71;
+}
+
+.pedido-resumo {
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.resumo-item {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 0;
+  color: #666;
+}
+
+.resumo-item.total {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 2px dashed #ddd;
+  font-weight: bold;
+  color: #333;
+}

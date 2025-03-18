@@ -1,0 +1,38 @@
+.produto {
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin: 10px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.produto img {
+  max-width: 200px;
+  height: auto;
+}
+
+.produtos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.item-carrinho {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.item-carrinho img {
+  width: 100px;
+  margin-right: 15px;
+}
+
+.pedido-card {
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin: 10px;
+  border-radius: 8px;
+}
