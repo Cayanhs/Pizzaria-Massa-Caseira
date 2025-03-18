@@ -242,35 +242,38 @@
         </div>
         <div class="modal-body">
           <form id="formLogin" onsubmit="fazerLogin(event)">
-            <div class="form-group">
-              <div class="input-icon">
-                <i class="bi bi-envelope"></i>
-                <input
-                  type="email"
-                  id="email"
-                  required
-                  placeholder="Seu email"
-                />
+              <div class="form-group">
+                  <div class="input-icon">
+                      <i class="bi bi-envelope"></i>
+                      <input
+                          type="email"
+                          id="email"
+                          required
+                          placeholder="Seu email"
+                      />
+                  </div>
               </div>
-            </div>
-            <div class="form-group">
-              <div class="input-icon">
-                <i class="bi bi-lock"></i>
-                <input
-                  type="password"
-                  id="senha"
-                  required
-                  placeholder="Sua senha"
-                />
-                <button
-                  type="button"
-                  class="toggle-password"
-                  onclick="togglePassword()"
-                >
-                  <i class="bi bi-eye"></i>
-                </button>
+              <div class="form-group">
+                  <div class="input-icon">
+                      <i class="bi bi-lock"></i>
+                      <input
+                          type="password"
+                          id="senha"
+                          required
+                          placeholder="Sua senha"
+                      />
+                      <button
+                          type="button"
+                          class="toggle-password"
+                          onclick="togglePassword()"
+                      >
+                          <i class="bi bi-eye"></i>
+                      </button>
+                  </div>
               </div>
-            </div>
+              <!-- Resto do código -->
+          </form>
+      </div>
 
             <div class="form-options">
               <label class="checkbox">
@@ -465,6 +468,7 @@
         background: rgba(0, 0, 0, 0.5);
         backdrop-filter: blur(4px);
         z-index: 1000;
+        color: #1a1a1a;
         justify-content: center;
         align-items: center;
       }
@@ -473,6 +477,7 @@
         background: white;
         border-radius: 12px;
         width: 90%;
+        color: #1a1a1a;
         max-width: 360px;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
       }
@@ -518,6 +523,7 @@
         width: 100%;
         padding: 12px 40px 12px 35px;
         border: 2px solid #ffe082;
+        color: #000;
         border-radius: 8px;
         font-size: 1rem;
         transition: all 0.3s;
@@ -525,6 +531,7 @@
 
       .input-icon input:focus {
         border-color: #ffc107;
+        color: #000;
         box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.1);
         outline: none;
       }
