@@ -131,16 +131,12 @@
 
         // Função para mostrar um slide específico
         function showSlide(index) {
-          // Remove a classe active de todos os slides e dots
           slides.forEach((slide) => slide.classList.remove("active"));
           dots.forEach((dot) => dot.classList.remove("active"));
-
-          // Adiciona a classe active ao slide e dot atual
           slides[index].classList.add("active");
           dots[index].classList.add("active");
         }
 
-        // Adiciona evento de clique para cada dot
         dots.forEach((dot) => {
           dot.addEventListener("click", function () {
             currentSlide = parseInt(this.getAttribute("data-slide"));
@@ -148,16 +144,14 @@
           });
         });
 
-        // Rotação automática dos slides
         setInterval(() => {
           currentSlide = (currentSlide + 1) % slides.length;
           showSlide(currentSlide);
-        }, 15000); // Muda a cada 15 segundos
+        }, 15000);
       });
     </script>
 
     <script>
-      // Menu Mobile
       const menuToggle = document.querySelector(".menu-toggle");
       const navLinks = document.querySelector(".nav-links");
       const links = document.querySelectorAll(".nav-links a");
@@ -167,7 +161,6 @@
         navLinks.classList.toggle("active");
       });
 
-      // Fechar menu ao clicar em um link
       links.forEach((link) => {
         link.addEventListener("click", () => {
           menuToggle.classList.remove("active");
@@ -231,7 +224,6 @@
       </div>
     </footer>
 
-    <!-- Adicione o modal de login antes do fechamento do body -->
     <div class="modal-login" id="modalLogin">
       <div class="modal-content">
         <div class="modal-header">
@@ -242,38 +234,35 @@
         </div>
         <div class="modal-body">
           <form id="formLogin" onsubmit="fazerLogin(event)">
-              <div class="form-group">
-                  <div class="input-icon">
-                      <i class="bi bi-envelope"></i>
-                      <input
-                          type="email"
-                          id="email"
-                          required
-                          placeholder="Seu email"
-                      />
-                  </div>
+            <div class="form-group">
+              <div class="input-icon">
+                <i class="bi bi-envelope"></i>
+                <input
+                  type="email"
+                  id="email"
+                  required
+                  placeholder="Seu email"
+                />
               </div>
-              <div class="form-group">
-                  <div class="input-icon">
-                      <i class="bi bi-lock"></i>
-                      <input
-                          type="password"
-                          id="senha"
-                          required
-                          placeholder="Sua senha"
-                      />
-                      <button
-                          type="button"
-                          class="toggle-password"
-                          onclick="togglePassword()"
-                      >
-                          <i class="bi bi-eye"></i>
-                      </button>
-                  </div>
+            </div>
+            <div class="form-group">
+              <div class="input-icon">
+                <i class="bi bi-lock"></i>
+                <input
+                  type="password"
+                  id="senha"
+                  required
+                  placeholder="Sua senha"
+                />
+                <button
+                  type="button"
+                  class="toggle-password"
+                  onclick="togglePassword()"
+                >
+                  <i class="bi bi-eye"></i>
+                </button>
               </div>
-              <!-- Resto do código -->
-          </form>
-      </div>
+            </div>
 
             <div class="form-options">
               <label class="checkbox">
@@ -291,7 +280,6 @@
       </div>
     </div>
 
-    <!-- Adicione este script antes do fechamento do body -->
     <script>
       function abrirModalLogin() {
         document.getElementById("modalLogin").style.display = "flex";
@@ -329,6 +317,7 @@
           document.getElementById("formLogin").reset();
           fecharModalLogin();
           atualizarInterface();
+          window.location.href = "pedidos.html"; // Redireciona para pedidos
         } else {
           mostrarNotificacao("Acesso negado", "error");
         }
@@ -339,6 +328,7 @@
         sessionStorage.removeItem("usuario");
         atualizarInterface();
         mostrarNotificacao("Logout realizado com sucesso!");
+        window.location.href = "index.html"; // Volta para a página inicial
       }
 
       function atualizarInterface() {
@@ -347,29 +337,22 @@
           JSON.parse(sessionStorage.getItem("usuario"));
 
         const btnLogin = document.querySelector(".btn-login");
-        const linkPedidos = document.querySelector(
-          'a[href="pedidos.html"]'
-        ).parentElement;
-
-        // Mantém o botão sempre igual, apenas com "Login"
-        btnLogin.innerHTML = `
-          <i class="bi bi-person-circle"></i>
-          <span class="login-text">Login</span>
-        `;
-
-        // Remove as classes de logged-in
-        btnLogin.className = "btn-login";
+        const linkPedidos = document.querySelector('a[href="pedidos.html"]').parentElement;
 
         if (usuario && usuario.logado) {
+          btnLogin.innerHTML = `
+            <i class="bi bi-box-arrow-right"></i>
+            <span class="login-text">Logout</span>
+          `;
           btnLogin.onclick = fazerLogout;
-          if (usuario.tipo === "admin") {
-            linkPedidos.style.display = "block";
-          } else {
-            linkPedidos.style.display = "none";
-          }
+          linkPedidos.style.display = "block"; // Mostra o link de pedidos
         } else {
+          btnLogin.innerHTML = `
+            <i class="bi bi-person-circle"></i>
+            <span class="login-text">Login</span>
+          `;
           btnLogin.onclick = abrirModalLogin;
-          linkPedidos.style.display = "none";
+          linkPedidos.style.display = "none"; // Esconde o link de pedidos
         }
       }
 
@@ -415,15 +398,13 @@
           notificacao.style.transform = "translateX(100%)";
           notificacao.style.opacity = "0";
           setTimeout(() => notificacao.remove(), 300);
-        }, 1500); // Reduzido para 1.5 segundos
+        }, 1500);
       }
 
-      // Inicializa a interface quando a página carrega
       document.addEventListener("DOMContentLoaded", () => {
         atualizarInterface();
       });
 
-      // Fecha o modal ao clicar fora dele
       window.onclick = function (event) {
         const modal = document.getElementById("modalLogin");
         if (event.target == modal) {
@@ -438,8 +419,8 @@
       }
 
       .btn-login {
-        background-color: #ffc107 !important; /* Força o amarelo sempre */
-        color: #000 !important; /* Força o texto preto sempre */
+        background-color: #ffc107 !important;
+        color: #000 !important;
         border: none;
         padding: 8px 16px;
         border-radius: 50px;
@@ -468,7 +449,6 @@
         background: rgba(0, 0, 0, 0.5);
         backdrop-filter: blur(4px);
         z-index: 1000;
-        color: #1a1a1a;
         justify-content: center;
         align-items: center;
       }
@@ -477,7 +457,6 @@
         background: white;
         border-radius: 12px;
         width: 90%;
-        color: #1a1a1a;
         max-width: 360px;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
       }
@@ -523,7 +502,6 @@
         width: 100%;
         padding: 12px 40px 12px 35px;
         border: 2px solid #ffe082;
-        color: #000;
         border-radius: 8px;
         font-size: 1rem;
         transition: all 0.3s;
@@ -531,7 +509,6 @@
 
       .input-icon input:focus {
         border-color: #ffc107;
-        color: #000;
         box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.1);
         outline: none;
       }
@@ -626,51 +603,46 @@
         }
       }
 
-      /* Responsividade Geral */
       @media (max-width: 1200px) {
         .container {
           max-width: 95%;
         }
       }
 
-      /* Tablets e telas médias */
       @media (max-width: 768px) {
-        /* Header e Navegação */
         .navbar {
           padding: 10px 15px;
         }
 
         .nav-links {
-          background: #1a1a1a; /* Fundo escuro */
-          border-top: 2px solid #ffc107; /* Borda amarela */
+          background: #1a1a1a;
+          border-top: 2px solid #ffc107;
         }
 
         .nav-links li a {
-          color: #fff; /* Links em branco */
+          color: #fff;
           padding: 15px;
           display: block;
-          border-bottom: 1px solid #333; /* Separador sutil */
+          border-bottom: 1px solid #333;
         }
 
         .nav-links li a:hover {
-          background: #333; /* Hover mais escuro */
-          color: #ffc107; /* Texto amarelo no hover */
+          background: #333;
+          color: #ffc107;
         }
 
         .nav-item-login {
           margin: 10px 15px;
         }
 
-        /* Ajuste do botão de menu */
         .menu-toggle {
-          color: #ffc107; /* Ícone do menu em amarelo */
+          color: #ffc107;
         }
 
         .menu-toggle:hover {
-          color: #ffb300; /* Hover mais escuro */
+          color: #ffb300;
         }
 
-        /* Animação suave */
         .nav-links {
           transition: all 0.3s ease;
         }
@@ -679,7 +651,6 @@
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
-        /* Hero Section */
         .hero .slide {
           flex-direction: column;
           padding: 20px;
@@ -701,7 +672,6 @@
           gap: 10px;
         }
 
-        /* Footer */
         .footer-content {
           grid-template-columns: 1fr;
           gap: 30px;
@@ -713,9 +683,7 @@
         }
       }
 
-      /* Smartphones */
       @media (max-width: 480px) {
-        /* Header */
         .logo span {
           display: none;
         }
@@ -724,7 +692,6 @@
           width: 40px;
         }
 
-        /* Hero Section */
         .hero h1 {
           font-size: 2rem;
         }
@@ -733,7 +700,6 @@
           font-size: 0.9rem;
         }
 
-        /* Mapa */
         .about {
           padding: 20px;
         }
@@ -742,7 +708,6 @@
           height: 250px;
         }
 
-        /* Login Modal */
         .modal-login .modal-content {
           width: 95%;
           margin: 10px;
@@ -753,7 +718,6 @@
         }
       }
 
-      /* Ajustes específicos para telas muito pequenas */
       @media (max-width: 360px) {
         .btn {
           padding: 8px 16px;
@@ -766,7 +730,6 @@
       }
     </style>
 
-    <!-- Adicione esta função para mostrar/ocultar senha -->
     <script>
       function togglePassword() {
         const senhaInput = document.getElementById("senha");
@@ -791,9 +754,7 @@
               text: "🍕 Venha experimentar as melhores pizzas artesanais da região! Pizzas, Esfihas e Pastéis deliciosos feitos com ingredientes selecionados.",
               url: window.location.href,
             });
-            // Removida a notificação de sucesso
           } else {
-            // Caso o navegador não suporte, redireciona para WhatsApp
             const texto = encodeURIComponent(
               "🍕 Venha experimentar as melhores pizzas artesanais da região! Pizzas, Esfihas e Pastéis deliciosos feitos com ingredientes selecionados. Acesse: " +
                 window.location.href
